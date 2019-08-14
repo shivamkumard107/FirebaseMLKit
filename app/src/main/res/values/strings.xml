@@ -1,3 +1,38 @@
 <resources>
     <string name="app_name">FirebaseMLKitDemo</string>
+
+    <string name="text_recognition">Text recognition</string>
+    <string name="face_detection">Face detection</string>
+    <string name="object_detection_tracking">Object detection and tracking</string>
+    <string name="image_labeling">Image labeling</string>
+    <string name="automl">AutoML Vision Edge</string>
+    <string name="barcode_scanning">Barcode scanning</string>
+    <string name="landmark_recognition">Landmark recognition</string>
+    <string name="lang_id">Language ID</string>
+    <string name="on_device_translation">On-device translation</string>
+    <string name="smart_reply">Smart Reply</string>
+
+    <string name="text_recognition_desc">Recognize and extract text from images</string>
+    <string name="face_detection_desc">Detect faces and facial landmarks, now with Face Contours</string>
+    <string name="object_detection_tracking_desc">Detect, track and classify objects in live camera and static images</string>
+    <string name="image_labeling_desc">Identify objects, locations, activities, animal species, products, and more</string>
+    <string name="automl_desc">Train and publish your own image classification models</string>
+    <string name="barcode_scanning_desc">Scan and process barcodes</string>
+    <string name="landmark_recognition_desc">Identify popular landmarks in an image</string>
+    <string name="lang_id_desc">Detect the language of text</string>
+    <string name="on_device_translation_desc">Translate text from one language to another</string>
+    <string name="smart_reply_desc">Generate text replies based on previous messages</string>
+
+
+    <string name="action_gallery">Gallery</string>
+    <string name="action_camera">Camera</string>
+    <string name="confirm_permission">This app need to access files on your device.</string>
+    <string name="confirm_camera">This app need to access camera on your device.</string>
+
+    <string name="profile_item_email_header">Email</string>
+    <string name="profile_item_phone_header">Cellphone Number</string>
+    <string name="profile_item_password_header">Change Password</string>
+    <string name="profile_item_email_details">sample@gmail.com</string>
+    <string name="profile_item_phone_details">+1 40425 50505</string>
+    <string name="profile_item_password_details">Tap to change password</string>
 </resources>

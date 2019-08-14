@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="capture_button_size">45dp</dimen>
+    <dimen name="capture_overlay_size">60dp</dimen>
+
+    <!-- Text Size. -->
+
+    <dimen name="xsmall_text">7dp</dimen>
+    <dimen name="small_text">9dp</dimen>
+    <dimen name="medium_text">10dp</dimen>
+    <dimen name="large_text">12dp</dimen>
+    <dimen name="xlarge_text">14dp</dimen>
+    <dimen name="xxlarge_text">16dp</dimen>
+    <dimen name="xxxlarge_text">18dp</dimen>
+
+    <!-- Common sizes. -->
+
+    <dimen name="items_inbetween_xsmall">3dp</dimen>
+    <dimen name="items_inbetween_small">6dp</dimen>
+    <dimen name="items_inbetween_medium">8dp</dimen>
+    <dimen name="items_inbetween_large">10dp</dimen>
+
+</resources>

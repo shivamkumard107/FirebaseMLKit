@@ -3,4 +3,11 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="windowBackground">#FFFFFF</color>
+
+    <color name="cv_capture_bg">#55000000</color>
+
+    <color name="profile_item_header_text_color">#4A4A4A</color>
+    <color name="profile_item_details_text_color">#774A4A4A</color>
 </resources>
