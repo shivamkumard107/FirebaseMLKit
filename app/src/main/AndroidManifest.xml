@@ -3,8 +3,6 @@
     package="com.developersk.firebasemlkitdemo">
 
 
-    <uses-feature android:name="android.hardware.camera" />
-
     <uses-permission android:name="android.permission.CAMERA" />
 
     <!-- Allows applications to open network sockets. -->
@@ -12,6 +10,13 @@
     <!-- Allows applications to access information about networks. -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -30,7 +35,6 @@
         <activity android:name=".LanguageActivity" />
         <activity android:name=".LandmarkActivity" />
         <activity android:name=".ImageActivity" />
-        <activity android:name=".FaceActivity" />
         <activity android:name=".BarcodeActivity" />
         <activity android:name=".AutoMLActivity" />
         <activity android:name=".MainActivity">
@@ -40,6 +44,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+            android:value="ocr, face, barcode, label" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>

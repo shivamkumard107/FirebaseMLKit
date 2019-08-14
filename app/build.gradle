@@ -33,8 +33,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     //Firebase here
-    implementation 'com.google.firebase:firebase-core:17.0.0'
-    implementation 'com.google.firebase:firebase-ml-vision:21.0.0'
+    implementation 'com.google.firebase:firebase-ml-vision:15.0.0'
+    implementation 'com.google.firebase:firebase-core:15.0.2'
     implementation 'com.google.firebase:firebase-ml-vision-automl:17.0.0'
     implementation 'com.google.firebase:firebase-ml-vision-face-model:18.0.0'
     implementation 'com.google.firebase:firebase-ml-vision-image-label-model:18.0.0'
