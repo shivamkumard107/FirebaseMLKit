@@ -91,4 +91,7 @@
 
     <string name="smart_reply_btn">Suggest Me Replying Messages</string>
     <string name="smart_reply_error">The conversation\'s language isn\'t supported, so the result doesn\'t contain any suggestions.</string>
+
+    <string name="btn_device">Device</string>
+    <string name="btn_cloud">Cloud</string>
 </resources>
