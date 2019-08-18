@@ -2,12 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.developersk.firebasemlkitdemo">
 
-
-    <uses-permission android:name="android.permission.CAMERA" />
-
-    <!-- Allows applications to open network sockets. -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- Allows applications to access information about networks. -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- Allows applications to open network sockets. -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Allows applications to access information about networks. -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -25,25 +21,49 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProfileActivity"></activity>
-        <activity android:name=".ScannerActivity" />
-        <activity android:name=".CustomActivity" />
-        <activity android:name=".BaseActivity" />
-        <activity android:name=".TranslateActivity" />
-        <activity android:name=".TextActivity" />
-        <activity android:name=".SmartReplyActivity" />
-        <activity android:name=".LanguageActivity" />
-        <activity android:name=".LandmarkActivity" />
-        <activity android:name=".ImageActivity" />
-        <activity android:name=".BarcodeActivity" />
-        <activity android:name=".AutoMLActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Authentication.PhoneAuthActivity"></activity>
+
+        <activity android:name=".Authentication.GoogleSignInActivity" />
+
+        <activity android:name=".Authentication.EmailPasswordActivity" />
+
+        <activity android:name=".Authentication.AuthenticationActivity" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+        <activity android:name=".ProfileActivity" />
+
+        <activity android:name=".ScannerActivity" />
+
+        <activity android:name=".CustomActivity" />
+
+        <activity android:name=".BaseActivity" />
+
+        <activity android:name=".TranslateActivity" />
+
+        <activity android:name=".TextActivity" />
+
+        <activity android:name=".SmartReplyActivity" />
+
+        <activity android:name=".LanguageActivity" />
+
+        <activity android:name=".LandmarkActivity" />
+
+        <activity android:name=".ImageActivity" />
+
+        <activity android:name=".BarcodeActivity" />
+
+        <activity android:name=".AutoMLActivity" />
+
+        <activity android:name=".MainActivity">
+
+        </activity>
+
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="ocr, face, barcode, label" />

@@ -1,11 +1,9 @@
 package com.developersk.firebasemlkitdemo;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.provider.MediaStore;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
@@ -24,6 +23,7 @@ import java.util.List;
 
 public class TextActivity extends AppCompatActivity {
 
+    static final int REQUEST_IMAGE_CAPTURE = 1;
     private Button snapBtn;
     private Button detectBtn;
     private ImageView imageView;
@@ -51,8 +51,6 @@ public class TextActivity extends AppCompatActivity {
             }
         });
     }
-
-    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
