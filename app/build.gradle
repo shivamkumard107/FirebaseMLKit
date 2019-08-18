@@ -2,6 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+    aaptOptions {
+        noCompress "tflite"
+    }
+
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
     defaultConfig {
