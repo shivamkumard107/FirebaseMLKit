@@ -21,8 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreenActivity"
-        >
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,7 +31,7 @@
         <activity android:name=".Authentication.PhoneAuthActivity" />
         <activity android:name=".Authentication.GoogleSignInActivity" />
         <activity android:name=".Authentication.EmailPasswordActivity" />
-        <activity android:name=".Authentication.AuthenticationActivity"></activity>
+        <activity android:name=".Authentication.AuthenticationActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ScannerActivity" />
         <activity android:name=".CustomActivity" />
@@ -45,9 +44,8 @@
         <activity android:name=".ImageActivity" />
         <activity android:name=".BarcodeActivity" />
         <activity android:name=".AutoMLActivity" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
