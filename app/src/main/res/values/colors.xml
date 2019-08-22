@@ -10,4 +10,5 @@
 
     <color name="profile_item_header_text_color">#4A4A4A</color>
     <color name="profile_item_details_text_color">#774A4A4A</color>
+    <color name="color_splash">#EAEEEF</color>
 </resources>
