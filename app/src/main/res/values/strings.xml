@@ -94,4 +94,5 @@
 
     <string name="btn_device">Device</string>
     <string name="btn_cloud">Cloud</string>
+    <string name="error_not_found">No text found</string>
 </resources>

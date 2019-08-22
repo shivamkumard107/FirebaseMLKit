@@ -2,97 +2,148 @@ package com.developersk.firebasemlkitdemo;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
+import androidx.annotation.NonNull;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.cloud.FirebaseVisionCloudDetectorOptions;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.text.FirebaseVisionCloudTextRecognizerOptions;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
-import java.util.List;
+import java.util.Arrays;
 
-public class TextActivity extends AppCompatActivity {
-
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-    private Button snapBtn;
-    private Button detectBtn;
-    private ImageView imageView;
-    private TextView txtView;
-    private Bitmap imageBitmap;
+public class TextActivity extends BaseActivity implements View.OnClickListener {
+    private Bitmap mBitmap;
+    private ImageView mImageView;
+    private TextView mTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text);
-        snapBtn = findViewById(R.id.snapBtn);
-        detectBtn = findViewById(R.id.detectBtn);
-        imageView = findViewById(R.id.imageView);
-        txtView = findViewById(R.id.txtView);
-        snapBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dispatchTakePictureIntent();
-            }
-        });
-        detectBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                detectTxt();
-            }
-        });
+
+        mTextView = findViewById(R.id.text_view);
+        mImageView = findViewById(R.id.image_view);
+        findViewById(R.id.btn_device).setOnClickListener(this);
+        findViewById(R.id.btn_cloud).setOnClickListener(this);
     }
 
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_device:
+                if (mBitmap != null) {
+                    runTextRecognition();
+                }
+                break;
+            case R.id.btn_cloud:
+                if (mBitmap != null) {
+                    runCloudTextRecognition();
+                }
+                break;
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            imageBitmap = (Bitmap) extras.get("data");
-            imageView.setImageBitmap(imageBitmap);
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case RC_STORAGE_PERMS1:
+                case RC_STORAGE_PERMS2:
+                    checkStoragePermission(requestCode);
+                    break;
+                case RC_SELECT_PICTURE:
+                    Uri dataUri = data.getData();
+                    String path = MyHelper.getPath(this, dataUri);
+                    if (path == null) {
+                        mBitmap = MyHelper.resizeImage(imageFile, this, dataUri, mImageView);
+                    } else {
+                        mBitmap = MyHelper.resizeImage(imageFile, path, mImageView);
+                    }
+                    if (mBitmap != null) {
+                        mTextView.setText(null);
+                        mImageView.setImageBitmap(mBitmap);
+                    }
+                    break;
+                case RC_TAKE_PICTURE:
+                    mBitmap = MyHelper.resizeImage(imageFile, imageFile.getPath(), mImageView);
+                    if (mBitmap != null) {
+                        mTextView.setText(null);
+                        mImageView.setImageBitmap(mBitmap);
+                    }
+                    break;
+            }
         }
     }
 
-    private void detectTxt() {
-        FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(imageBitmap);
-        FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance().getCloudTextRecognizer();
+    private void runTextRecognition() {
+        FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(mBitmap);
+        FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance().getOnDeviceTextRecognizer();
         detector.processImage(image).addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
             @Override
-            public void onSuccess(FirebaseVisionText firebaseVisionText) {
-                processTxt(firebaseVisionText);
+            public void onSuccess(FirebaseVisionText texts) {
+                processTextRecognitionResult(texts);
             }
-        }).addOnFailureListener(e -> {
-
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                e.printStackTrace();
+            }
         });
     }
 
-    private void processTxt(FirebaseVisionText text) {
-        List<FirebaseVisionText.TextBlock> blocks = text.getTextBlocks();
-        if (blocks.size() == 0) {
-            Toast.makeText(TextActivity.this, "No Text :(", Toast.LENGTH_LONG).show();
-            return;
-        }
-        Log.e("_text_", text.getText());
-        for (FirebaseVisionText.TextBlock block : text.getTextBlocks()) {
-            String txt = block.getText();
-            txtView.setTextSize(24);
-            txtView.setText(txt);
-        }
+    private void runCloudTextRecognition() {
+        MyHelper.showDialog(this);
+
+        FirebaseVisionCloudTextRecognizerOptions options = new FirebaseVisionCloudTextRecognizerOptions.Builder()
+                .setLanguageHints(Arrays.asList("en", "hi"))
+                .setModelType(FirebaseVisionCloudDetectorOptions.LATEST_MODEL)
+                .build();
+
+        FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(mBitmap);
+        FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance().getCloudTextRecognizer(options);
+
+        detector.processImage(image).addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
+            @Override
+            public void onSuccess(FirebaseVisionText texts) {
+                MyHelper.dismissDialog();
+                processTextRecognitionResult(texts);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                MyHelper.dismissDialog();
+                e.printStackTrace();
+            }
+        });
     }
 
+    private void processTextRecognitionResult(FirebaseVisionText firebaseVisionText) {
+        mTextView.setText(null);
+        if (firebaseVisionText.getTextBlocks().size() == 0) {
+            mTextView.setText(R.string.error_not_found);
+            return;
+        }
+        for (FirebaseVisionText.TextBlock block : firebaseVisionText.getTextBlocks()) {
+            mTextView.append(block.getText());
+
+            //In case you want to extract each line
+			/*
+			for (FirebaseVisionText.Line line: block.getLines()) {
+				for (FirebaseVisionText.Element element: line.getElements()) {
+					mTextView.append(element.getText() + " ");
+				}
+			}
+			*/
+        }
+    }
 }
