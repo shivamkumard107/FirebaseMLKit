@@ -1,6 +1,8 @@
 package com.developersk.firebasemlkitdemo;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -153,18 +155,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_documentation) {
             /*add intent to chrome*/
+            Intent intent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://firebase.google.com/docs/ml-kit"));
+            startActivity(intent);
         } else if (id == R.id.nav_contribute) {
             /*add intent to chrome*/
+            Intent intent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://github.com/shivamkumard107/FirebaseMLKit"));
+            startActivity(intent);
         }  else if (id == R.id.nav_about) {
             Intent about = new Intent(this, AboutusActivity.class);
             startActivity(about);
         } else if (id == R.id.nav_share) {
             /*sharing intent*/
-        } else if (id == R.id.nav_feedback) {
-            Intent feedback = new Intent(this, FeedbackAtivity.class);
-            startActivity(feedback);
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            String shareBody = "http://play.google.com/store/apps/details?id=" + this.getPackageName() + "\n Here is the share content body";
+            /*TODO add app link here*/
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+            startActivity(Intent.createChooser(sharingIntent, "Share via"));
         } else if (id == R.id.nav_rate) {
             /*add intent to playstore*/
+            Uri uri = Uri.parse("market://details?id=" + this.getPackageName());
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            // To count with Play market backstack, After pressing back button,
+            // to taken back to our application, we need to add following flags to intent.
+            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            try {
+                startActivity(goToMarket);
+            } catch (ActivityNotFoundException e) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://play.google.com/store/apps/details?id=" + this.getPackageName())));
+            }
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
