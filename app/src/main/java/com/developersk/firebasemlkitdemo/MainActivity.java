@@ -161,18 +161,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_tools) {
-
+        if (id == R.id.nav_documentation) {
+            /*add intent to chrome*/
+        } else if (id == R.id.nav_contribute) {
+            /*add intent to chrome*/
+        } else if (id == R.id.nav_settings) {
+            Intent setting = new Intent(this, SettingsActivity.class);
+            startActivity(setting);
+        } else if (id == R.id.nav_about) {
+            Intent about = new Intent(this, AboutusActivity.class);
+            startActivity(about);
         } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            /*sharing intent*/
+        } else if (id == R.id.nav_feedback) {
+            Intent feedback = new Intent(this, FeedbackAtivity.class);
+            startActivity(feedback);
+        }else if(id == R.id.nav_rate){
+            /*add intent to playstore*/
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

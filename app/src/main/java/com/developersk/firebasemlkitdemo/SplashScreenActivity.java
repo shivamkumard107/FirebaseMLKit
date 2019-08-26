@@ -32,6 +32,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             finish();
 
-        }, 3000); // wait for 3 seconds
+        }, 0); // wait for 3 seconds
     }
 }
