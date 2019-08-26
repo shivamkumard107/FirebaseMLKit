@@ -19,10 +19,10 @@ import androidx.annotation.GuardedBy;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.developersk.firebasemlkitdemo.common.BitmapUtils;
-import com.developersk.firebasemlkitdemo.common.FrameMetadata;
-import com.developersk.firebasemlkitdemo.common.GraphicOverlay;
-import com.developersk.firebasemlkitdemo.common.VisionImageProcessor;
+import com.developersk.firebasemlkitdemo.Common.BitmapUtils;
+import com.developersk.firebasemlkitdemo.Common.FrameMetadata;
+import com.developersk.firebasemlkitdemo.Common.GraphicOverlay;
+import com.developersk.firebasemlkitdemo.Common.VisionImageProcessor;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.ml.common.FirebaseMLException;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;

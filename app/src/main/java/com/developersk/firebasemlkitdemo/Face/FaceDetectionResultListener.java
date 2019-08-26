@@ -5,8 +5,8 @@ import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.developersk.firebasemlkitdemo.common.FrameMetadata;
-import com.developersk.firebasemlkitdemo.common.GraphicOverlay;
+import com.developersk.firebasemlkitdemo.Common.FrameMetadata;
+import com.developersk.firebasemlkitdemo.Common.GraphicOverlay;
 import com.google.firebase.ml.vision.face.FirebaseVisionFace;
 
 import java.util.List;

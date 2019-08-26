@@ -7,17 +7,17 @@
     tools:context=".ScannerActivity"
     tools:layout_editor_absoluteY="81dp">
 
-    <com.developersk.firebasemlkitdemo.common.CameraSourcePreview
+    <com.developersk.firebasemlkitdemo.Common.CameraSourcePreview
         android:id="@+id/preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.developersk.firebasemlkitdemo.common.GraphicOverlay
+        <com.developersk.firebasemlkitdemo.Common.GraphicOverlay
             android:id="@+id/barcodeOverlay"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </com.developersk.firebasemlkitdemo.common.CameraSourcePreview>
+    </com.developersk.firebasemlkitdemo.Common.CameraSourcePreview>
     <RelativeLayout
         android:id="@+id/rlCapture"
         android:layout_width="match_parent"

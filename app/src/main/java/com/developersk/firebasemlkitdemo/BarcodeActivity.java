@@ -91,4 +91,9 @@ public class BarcodeActivity extends BaseActivity {
             return result.toString();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

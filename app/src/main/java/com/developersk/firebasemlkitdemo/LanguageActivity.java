@@ -1,12 +1,13 @@
 package com.developersk.firebasemlkitdemo;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -57,12 +58,7 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                     txt.setText(getString(R.string.language_identification_error));
                 }
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                txt.setText(e.getMessage());
-            }
-        });
+        }).addOnFailureListener(e -> txt.setText(e.getMessage()));
     }
 
     private void identifyAllLanguages(String text) {
@@ -82,5 +78,10 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                 txt.setText(e.getMessage());
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -48,7 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
         imageutils = new Imageutils(this);
         imageutils.setImageAttachment_callBack(getImageAttachmentCallback());
 
-        progressUtils=new ProgressUtils(this);
+        progressUtils = new ProgressUtils(this);
 
         faceCenterCrop = new FaceCenterCrop(this, 100, 100, 1);
 
@@ -60,12 +59,11 @@ public class ProfileActivity extends AppCompatActivity {
                 Log.d(TAG, "getImageAttachmentCallback: " + from);
 
                 if (from == SCANNER_REQUEST_CODE) {
-                    ivProfile.setImageBitmap(file);                }
-                else if(from == GALEERY_REQUEST_CODE)
-                {
+                    ivProfile.setImageBitmap(file);
+                } else if (from == GALEERY_REQUEST_CODE) {
                     Log.d("Time log", "IA callback triggered");
 
-                    ProgressBarData progressBarData= new ProgressBarData.ProgressBarBuilder()
+                    ProgressBarData progressBarData = new ProgressBarData.ProgressBarBuilder()
                             .setCancelable(true)
                             .setProgressMessage("Processing")
                             .setProgressMessageColor(Color.parseColor("#4A4A4A"))
@@ -135,5 +133,10 @@ public class ProfileActivity extends AppCompatActivity {
     @OnClick(R.id.ivProfile)
     public void onViewClicked() {
         imageutils.imagepicker(1);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

@@ -29,9 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView recyclerView;
     private MainAdapter adapter;
     private String[] backgroundColors = {"#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"};
-    private ImageView user_image;
-    private ImageView nav_user_img;
-    private TextView nav_user;
+
 
     private static void addImages() {
         images.add(R.drawable.text_recognition);
@@ -124,10 +122,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         View hView = navigationView.getHeaderView(0);
-        nav_user = hView.findViewById(R.id.username);
-        nav_user_img = hView.findViewById(R.id.userimg);
-        nav_user.setText("Anonymous");
-        nav_user_img.setImageResource(R.drawable.ic_menu_camera);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);

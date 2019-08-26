@@ -18,7 +18,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import com.developersk.firebasemlkitdemo.common.GraphicOverlay;
+import com.developersk.firebasemlkitdemo.Common.GraphicOverlay;
 import com.google.android.gms.vision.CameraSource;
 import com.google.firebase.ml.vision.common.FirebaseVisionPoint;
 import com.google.firebase.ml.vision.face.FirebaseVisionFace;

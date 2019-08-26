@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#000069</color>
+    <color name="colorPrimaryDark">#000036</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="windowBackground">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
 
     <color name="cv_capture_bg">#55000000</color>
 
     <color name="profile_item_header_text_color">#4A4A4A</color>
     <color name="profile_item_details_text_color">#774A4A4A</color>
     <color name="color_splash">#EAEEEF</color>
+    <color name="color_card">#FDFEFE</color>
     <color name="color_black">#000000</color>
+    <color name="color_title">#3B3B98</color>
+    <color name="color_desc">#2C3A47</color>
 </resources>

@@ -128,4 +128,6 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="anonymous">Anonymous</string>
+    <string name="developersk">Shivam Kumar</string>
+    <string name="designermr">Mohit Ranjan</string>
 </resources>

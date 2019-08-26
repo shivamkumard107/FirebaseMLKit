@@ -1,4 +1,4 @@
-package com.developersk.firebasemlkitdemo.common;
+package com.developersk.firebasemlkitdemo.Common;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

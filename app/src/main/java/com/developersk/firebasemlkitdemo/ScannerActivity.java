@@ -21,10 +21,10 @@ import com.developersk.firebasemlkitdemo.Face.FaceDetectionProcessor;
 import com.developersk.firebasemlkitdemo.Face.FaceDetectionResultListener;
 import com.developersk.firebasemlkitdemo.FaceCenterCircleView.FaceCenterCrop;
 import com.developersk.firebasemlkitdemo.Utils.Imageutils;
-import com.developersk.firebasemlkitdemo.common.CameraSource;
-import com.developersk.firebasemlkitdemo.common.CameraSourcePreview;
-import com.developersk.firebasemlkitdemo.common.FrameMetadata;
-import com.developersk.firebasemlkitdemo.common.GraphicOverlay;
+import com.developersk.firebasemlkitdemo.Common.CameraSource;
+import com.developersk.firebasemlkitdemo.Common.CameraSourcePreview;
+import com.developersk.firebasemlkitdemo.Common.FrameMetadata;
+import com.developersk.firebasemlkitdemo.Common.GraphicOverlay;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.ml.vision.FirebaseVision;
@@ -297,5 +297,9 @@ public class ScannerActivity extends AppCompatActivity {
         if (faceCenterCrop != null)
             faceCenterCrop.transform(bmpCapturedImage, faceCenterCrop.getCenterPoint(capturedFaces), getFaceCropResult());
 
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

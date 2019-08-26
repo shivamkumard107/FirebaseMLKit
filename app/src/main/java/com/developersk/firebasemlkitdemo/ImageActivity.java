@@ -125,4 +125,8 @@ public class ImageActivity extends BaseActivity implements View.OnClickListener 
             mTextView.append(label.getConfidence() + "\n\n");
         }
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

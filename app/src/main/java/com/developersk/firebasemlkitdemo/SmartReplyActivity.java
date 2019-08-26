@@ -59,4 +59,8 @@ public class SmartReplyActivity extends AppCompatActivity implements View.OnClic
             }
         }).addOnFailureListener(e -> txt.setText(e.getMessage()));
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
