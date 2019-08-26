@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +27,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView recyclerView;
     private MainAdapter adapter;
     private String[] backgroundColors = {"#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"};
-
+    private ImageView user_image;
+    private ImageView nav_user_img;
+    private TextView nav_user;
     private static void addImages() {
         images.add(R.drawable.text_recognition);
         images.add(R.drawable.face_detection);
@@ -115,12 +120,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View hView =  navigationView.getHeaderView(0);
+         nav_user = hView.findViewById(R.id.username);
+        nav_user_img = hView.findViewById(R.id.userimg);
+        nav_user.setText("Anonymous");
+        nav_user_img.setImageResource(R.drawable.ic_avatar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
+        user_image = findViewById(R.id.userimg);
     }
 
     @Override
