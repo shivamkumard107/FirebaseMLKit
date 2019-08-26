@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ImageView user_image;
     private ImageView nav_user_img;
     private TextView nav_user;
+
     private static void addImages() {
         images.add(R.drawable.text_recognition);
         images.add(R.drawable.face_detection);
@@ -120,17 +121,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        View hView =  navigationView.getHeaderView(0);
-         nav_user = hView.findViewById(R.id.username);
+        View hView = navigationView.getHeaderView(0);
+        nav_user = hView.findViewById(R.id.username);
         nav_user_img = hView.findViewById(R.id.userimg);
         nav_user.setText("Anonymous");
-        nav_user_img.setImageResource(R.drawable.ic_avatar);
+        nav_user_img.setImageResource(R.drawable.ic_menu_camera);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        user_image = findViewById(R.id.userimg);
     }
 
     @Override
@@ -143,27 +143,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main2, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -175,10 +155,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             /*add intent to chrome*/
         } else if (id == R.id.nav_contribute) {
             /*add intent to chrome*/
-        } else if (id == R.id.nav_settings) {
-            Intent setting = new Intent(this, SettingsActivity.class);
-            startActivity(setting);
-        } else if (id == R.id.nav_about) {
+        }  else if (id == R.id.nav_about) {
             Intent about = new Intent(this, AboutusActivity.class);
             startActivity(about);
         } else if (id == R.id.nav_share) {
@@ -186,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_feedback) {
             Intent feedback = new Intent(this, FeedbackAtivity.class);
             startActivity(feedback);
-        }else if(id == R.id.nav_rate){
+        } else if (id == R.id.nav_rate) {
             /*add intent to playstore*/
         }
 

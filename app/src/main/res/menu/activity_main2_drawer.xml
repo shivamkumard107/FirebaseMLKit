@@ -12,10 +12,6 @@
             android:id="@+id/nav_contribute"
             android:icon="@drawable/ic_action_contribute"
             android:title="@string/menu_contribute" />
-        <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/action_settings" />
     </group>
 
     <item android:title="Communicate">
