@@ -25,13 +25,11 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(() -> {
 
             Intent i = new Intent(SplashScreenActivity.this, MainActivity.class);
-
             startActivity(i);
 
             // close this activity
-
             finish();
 
-        }, 3000); // wait for 3 seconds
+        }, 1700); // wait for 3 seconds
     }
 }

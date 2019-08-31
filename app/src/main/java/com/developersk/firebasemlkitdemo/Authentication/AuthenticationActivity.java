@@ -20,8 +20,16 @@ public class AuthenticationActivity extends AppCompatActivity implements Adapter
     private static final Class[] CLASSES = new Class[]{
             EmailPasswordActivity.class,
             GoogleSignInActivity.class,
-            PhoneAuthActivity.class,
     };
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

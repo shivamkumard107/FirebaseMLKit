@@ -2,18 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.developersk.firebasemlkitdemo">
 
-    <uses-permission android:name="android.permission.CAMERA" /> <!-- Allows applications to open network sockets. -->
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- Allows applications to access information about networks. -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="true" />
-    <uses-feature
-        android:name="android.hardware.camera.autofocus"
-        android:required="true" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".AboutusActivity" />
         <activity android:name=".SplashScreenActivity">
             <intent-filter>
@@ -29,7 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Authentication.PhoneAuthActivity" />
         <activity android:name=".Authentication.GoogleSignInActivity" />
         <activity android:name=".Authentication.EmailPasswordActivity" />
         <activity android:name=".Authentication.AuthenticationActivity" />
@@ -62,6 +50,18 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-    </application>
+    </application> <!-- Allows applications to open network sockets. -->
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="true" /> <!-- Allows applications to access information about networks. -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

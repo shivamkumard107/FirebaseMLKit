@@ -58,6 +58,7 @@ public class GoogleSignInActivity extends BaseActivity implements GoogleApiClien
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_WIDE);
         signInButton.setOnClickListener(this);
+        signInButton.setColorScheme(R.color.colorAccent);
 
         findViewById(R.id.sign_out_button).setOnClickListener(this);
         findViewById(R.id.disconnect_button).setOnClickListener(this);
@@ -206,24 +207,24 @@ public class GoogleSignInActivity extends BaseActivity implements GoogleApiClien
         }
     }
 
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        @Override
-        protected Bitmap doInBackground(String... urls) {
-            Bitmap mIcon = null;
-            try {
-                InputStream in = new URL(urls[0]).openStream();
-                mIcon = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return mIcon;
-        }
-        @Override
-        protected void onPostExecute(Bitmap result) {
-            if (result != null) {
-                mImageView.getLayoutParams().width = (getResources().getDisplayMetrics().widthPixels / 100) * 24;
-                mImageView.setImageBitmap(result);
-            }
-        }
-    }
+//    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+//        @Override
+//        protected Bitmap doInBackground(String... urls) {
+//            Bitmap mIcon = null;
+//            try {
+//                InputStream in = new URL(urls[0]).openStream();
+//                mIcon = BitmapFactory.decodeStream(in);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            return mIcon;
+//        }
+//        @Override
+//        protected void onPostExecute(Bitmap result) {
+//            if (result != null) {
+//                mImageView.getLayoutParams().width = (getResources().getDisplayMetrics().widthPixels / 100) * 24;
+//                mImageView.setImageBitmap(result);
+//            }
+//        }
+//    }
 }

@@ -4,12 +4,14 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -18,18 +20,24 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.developersk.firebasemlkitdemo.Authentication.AuthenticationActivity;
+import com.developersk.firebasemlkitdemo.Authentication.EmailPasswordActivity;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String TAG = "MainActivity";
     private static ArrayList<Integer> images, title, description;
     private ArrayList<MainListItem> list;
     private RecyclerView recyclerView;
     private MainAdapter adapter;
     private String[] backgroundColors = {"#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"};
-
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     private static void addImages() {
         images.add(R.drawable.text_recognition);
@@ -77,6 +85,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = firebaseAuth -> {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            if (user != null) {
+                Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+            } else {
+                Log.d(TAG, "onAuthStateChanged:signed_out");
+            }
+            if(mAuth.getCurrentUser()==null)
+                startActivity(new Intent(this, AuthenticationActivity.class));
+        };
 
         images = new ArrayList<>();
         addImages();
@@ -114,7 +133,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         adapter = new MainAdapter(this, list);
 
         recyclerView = findViewById(R.id.recycler);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
 
         recyclerView.setAdapter(adapter);
@@ -129,6 +147,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -136,12 +169,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            Intent a = new Intent(Intent.ACTION_MAIN);
+            a.addCategory(Intent.CATEGORY_HOME);
+            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(a);
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main,menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int res_id = item.getItemId();
+        if(res_id==R.id.action_signout){
+            mAuth.signOut();
+            mAuthListener.onAuthStateChanged(mAuth);
+            Intent i = new Intent(this, AuthenticationActivity.class);
+            startActivity(i);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -157,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(Intent.ACTION_VIEW,
                     Uri.parse("https://github.com/shivamkumard107/FirebaseMLKit"));
             startActivity(intent);
-        }  else if (id == R.id.nav_about) {
+        } else if (id == R.id.nav_about) {
             Intent about = new Intent(this, AboutusActivity.class);
             startActivity(about);
         } else if (id == R.id.nav_share) {

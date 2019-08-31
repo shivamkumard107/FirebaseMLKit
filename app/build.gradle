@@ -55,6 +55,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-ml-natural-language-language-id-model:20.0.0'
     implementation 'com.google.firebase:firebase-ml-natural-language-smart-reply-model:20.0.0'
     implementation 'com.google.firebase:firebase-ml-natural-language-translate-model:20.0.0'
+    implementation 'com.facebook.android:facebook-login:5.1.0'
+    implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
 
     //Material Designing
     implementation 'androidx.cardview:cardview:1.0.0'
