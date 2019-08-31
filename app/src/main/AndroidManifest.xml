@@ -11,7 +11,9 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".AboutusActivity" />
-        <activity android:name=".SplashScreenActivity">
+        <activity android:name=".SplashScreenActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
