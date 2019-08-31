@@ -18,9 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Authentication.GoogleSignInActivity" />
         <activity android:name=".Authentication.EmailPasswordActivity" />
-        <activity android:name=".Authentication.AuthenticationActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ScannerActivity" />
         <activity android:name=".CustomActivity" />

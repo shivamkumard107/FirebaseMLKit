@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -20,7 +19,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.developersk.firebasemlkitdemo.Authentication.AuthenticationActivity;
 import com.developersk.firebasemlkitdemo.Authentication.EmailPasswordActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -94,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.d(TAG, "onAuthStateChanged:signed_out");
             }
             if(mAuth.getCurrentUser()==null)
-                startActivity(new Intent(this, AuthenticationActivity.class));
+                startActivity(new Intent(this, EmailPasswordActivity.class));
         };
 
         images = new ArrayList<>();
@@ -189,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(res_id==R.id.action_signout){
             mAuth.signOut();
             mAuthListener.onAuthStateChanged(mAuth);
-            Intent i = new Intent(this, AuthenticationActivity.class);
+            Intent i = new Intent(this, EmailPasswordActivity.class);
             startActivity(i);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             finish();
