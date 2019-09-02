@@ -40,40 +40,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static void addImages() {
         images.add(R.drawable.text_recognition);
         images.add(R.drawable.face_detection);
-        images.add(R.drawable.object_detection);
         images.add(R.drawable.image_labeling);
-        images.add(R.drawable.automl);
         images.add(R.drawable.barcode_scanning);
-        images.add(R.drawable.landmark_recognition);
         images.add(R.drawable.language_detection);
-        images.add(R.drawable.on_device_translate);
         images.add(R.drawable.smart_reply);
+
+        //coming soon
+        images.add(R.drawable.object_detection);
+        images.add(R.drawable.automl);
+        images.add(R.drawable.landmark_recognition);
+        images.add(R.drawable.on_device_translate);
     }
 
     private static void addTitle() {
         title.add(R.string.text_recognition);
         title.add(R.string.face_detection);
-        title.add(R.string.object_detection_tracking);
         title.add(R.string.image_labeling);
-        title.add(R.string.automl);
         title.add(R.string.barcode_scanning);
-        title.add(R.string.landmark_recognition);
         title.add(R.string.lang_id);
-        title.add(R.string.on_device_translation);
         title.add(R.string.smart_reply);
+
+        //coming soon
+        title.add(R.string.object_detection_tracking);
+        title.add(R.string.automl);
+        title.add(R.string.landmark_recognition);
+        title.add(R.string.on_device_translation);
+
     }
 
     private static void addDesc() {
         description.add(R.string.text_recognition_desc);
         description.add(R.string.face_detection_desc);
-        description.add(R.string.object_detection_tracking_desc);
         description.add(R.string.image_labeling_desc);
-        description.add(R.string.automl_desc);
         description.add(R.string.barcode_scanning_desc);
-        description.add(R.string.landmark_recognition_desc);
         description.add(R.string.lang_id_desc);
-        description.add(R.string.on_device_translation_desc);
         description.add(R.string.smart_reply_desc);
+
+        //coming soon
+        description.add(R.string.object_detection_tracking_desc);
+        description.add(R.string.automl_desc);
+        description.add(R.string.landmark_recognition_desc);
+        description.add(R.string.on_device_translation_desc);
     }
 
     @Override
@@ -91,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             } else {
                 Log.d(TAG, "onAuthStateChanged:signed_out");
             }
-            if(mAuth.getCurrentUser()==null)
+            if (mAuth.getCurrentUser() == null)
                 startActivity(new Intent(this, EmailPasswordActivity.class));
         };
 
@@ -104,15 +111,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Intent[] links = {
                 new Intent(MainActivity.this, TextActivity.class),
-                new Intent(MainActivity.this, ProfileActivity.class),
-                new Intent(MainActivity.this, CustomActivity.class),
+                new Intent(MainActivity.this, FaceDetectionActivity.class),
                 new Intent(MainActivity.this, ImageActivity.class),
-                new Intent(MainActivity.this, AutoMLActivity.class),
                 new Intent(MainActivity.this, BarcodeActivity.class),
-                new Intent(MainActivity.this, LandmarkActivity.class),
                 new Intent(MainActivity.this, LanguageActivity.class),
-                new Intent(MainActivity.this, TranslateActivity.class),
-                new Intent(MainActivity.this, SmartReplyActivity.class)
+                new Intent(MainActivity.this, SmartReplyActivity.class),
+
+                //coming soon
+                new Intent(MainActivity.this, CustomActivity.class),
+                new Intent(MainActivity.this, AutoMLActivity.class),
+                new Intent(MainActivity.this, LandmarkActivity.class),
+                new Intent(MainActivity.this, TranslateActivity.class)
         };
 
         list = new ArrayList<>();
@@ -177,14 +186,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main,menu);
+        inflater.inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int res_id = item.getItemId();
-        if(res_id==R.id.action_signout){
+        if (res_id == R.id.action_signout) {
             mAuth.signOut();
             mAuthListener.onAuthStateChanged(mAuth);
             Intent i = new Intent(this, EmailPasswordActivity.class);

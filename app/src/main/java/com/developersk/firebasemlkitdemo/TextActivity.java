@@ -4,21 +4,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.ml.vision.FirebaseVision;
-import com.google.firebase.ml.vision.cloud.FirebaseVisionCloudDetectorOptions;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
-import com.google.firebase.ml.vision.text.FirebaseVisionCloudTextRecognizerOptions;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
-
-import java.util.Arrays;
 
 public class TextActivity extends BaseActivity implements View.OnClickListener {
     private Bitmap mBitmap;
@@ -33,22 +26,14 @@ public class TextActivity extends BaseActivity implements View.OnClickListener {
         mTextView = findViewById(R.id.text_view);
         mImageView = findViewById(R.id.image_view);
         findViewById(R.id.btn_device).setOnClickListener(this);
-        findViewById(R.id.btn_cloud).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_device:
-                if (mBitmap != null) {
-                    runTextRecognition();
-                }
-                break;
-            case R.id.btn_cloud:
-                if (mBitmap != null) {
-                    runCloudTextRecognition();
-                }
-                break;
+        if (view.getId() == R.id.btn_device) {
+            if (mBitmap != null) {
+                runTextRecognition();
+            }
         }
     }
 
@@ -88,43 +73,7 @@ public class TextActivity extends BaseActivity implements View.OnClickListener {
     private void runTextRecognition() {
         FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(mBitmap);
         FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance().getOnDeviceTextRecognizer();
-        detector.processImage(image).addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
-            @Override
-            public void onSuccess(FirebaseVisionText texts) {
-                processTextRecognitionResult(texts);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    private void runCloudTextRecognition() {
-        MyHelper.showDialog(this);
-
-        FirebaseVisionCloudTextRecognizerOptions options = new FirebaseVisionCloudTextRecognizerOptions.Builder()
-                .setLanguageHints(Arrays.asList("en", "hi"))
-                .setModelType(FirebaseVisionCloudDetectorOptions.LATEST_MODEL)
-                .build();
-
-        FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(mBitmap);
-        FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance().getCloudTextRecognizer(options);
-
-        detector.processImage(image).addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
-            @Override
-            public void onSuccess(FirebaseVisionText texts) {
-                MyHelper.dismissDialog();
-                processTextRecognitionResult(texts);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                MyHelper.dismissDialog();
-                e.printStackTrace();
-            }
-        });
+        detector.processImage(image).addOnSuccessListener(this::processTextRecognitionResult).addOnFailureListener(Throwable::printStackTrace);
     }
 
     private void processTextRecognitionResult(FirebaseVisionText firebaseVisionText) {
@@ -146,6 +95,7 @@ public class TextActivity extends BaseActivity implements View.OnClickListener {
 			*/
         }
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

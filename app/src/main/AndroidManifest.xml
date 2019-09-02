@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Authentication.EmailPasswordActivity" />
-        <activity android:name=".ProfileActivity" />
+        <activity android:name=".FaceDetectionActivity" />
         <activity android:name=".ScannerActivity" />
         <activity android:name=".CustomActivity" />
         <activity android:name=".BaseActivity" />

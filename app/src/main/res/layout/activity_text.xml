@@ -47,12 +47,9 @@
         <Button
             android:id="@+id/btn_device"
             style="@style/CustomButton"
-            android:text="@string/btn_device" />
+            android:text="@string/btn_device"
+            android:textColor="@color/color_black"/>
 
-        <Button
-            android:id="@+id/btn_cloud"
-            style="@style/CustomButton"
-            android:text="@string/btn_cloud" />
 
     </LinearLayout>
 

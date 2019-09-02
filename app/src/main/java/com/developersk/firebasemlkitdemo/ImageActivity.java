@@ -9,13 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
-import com.google.firebase.ml.vision.label.FirebaseVisionCloudImageLabelerOptions;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel;
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabeler;
 import com.google.firebase.ml.vision.label.FirebaseVisionOnDeviceImageLabelerOptions;
@@ -35,54 +30,20 @@ public class ImageActivity extends BaseActivity implements View.OnClickListener 
         mTextView = findViewById(R.id.text_view);
         mImageView = findViewById(R.id.image_view);
         findViewById(R.id.btn_device).setOnClickListener(this);
-        findViewById(R.id.btn_cloud).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         mTextView.setText(null);
-        switch (view.getId()) {
-            case R.id.btn_device:
-                if (mBitmap != null) {
-                    FirebaseVisionOnDeviceImageLabelerOptions options = new FirebaseVisionOnDeviceImageLabelerOptions.Builder()
-                            .setConfidenceThreshold(0.7f)
-                            .build();
-                    FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(mBitmap);
-                    FirebaseVisionImageLabeler detector = FirebaseVision.getInstance().getOnDeviceImageLabeler(options);
-                    detector.processImage(image).addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionImageLabel>>() {
-                        @Override
-                        public void onSuccess(List<FirebaseVisionImageLabel> labels) {
-                            extractLabel(labels);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            mTextView.setText(e.getMessage());
-                        }
-                    });
-                }
-                break;
-            case R.id.btn_cloud:
-                if (mBitmap != null) {
-                    MyHelper.showDialog(this);
-                    FirebaseVisionCloudImageLabelerOptions options = new FirebaseVisionCloudImageLabelerOptions.Builder().setConfidenceThreshold(0.7f).build();
-                    FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(mBitmap);
-                    FirebaseVisionImageLabeler detector = FirebaseVision.getInstance().getCloudImageLabeler(options);
-                    detector.processImage(image).addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionImageLabel>>() {
-                        @Override
-                        public void onSuccess(List<FirebaseVisionImageLabel> labels) {
-                            MyHelper.dismissDialog();
-                            extractLabel(labels);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            MyHelper.dismissDialog();
-                            mTextView.setText(e.getMessage());
-                        }
-                    });
-                }
-                break;
+        if (view.getId() == R.id.btn_device) {
+            if (mBitmap != null) {
+                FirebaseVisionOnDeviceImageLabelerOptions options = new FirebaseVisionOnDeviceImageLabelerOptions.Builder()
+                        .setConfidenceThreshold(0.7f)
+                        .build();
+                FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(mBitmap);
+                FirebaseVisionImageLabeler detector = FirebaseVision.getInstance().getOnDeviceImageLabeler(options);
+                detector.processImage(image).addOnSuccessListener(this::extractLabel).addOnFailureListener(e -> mTextView.setText(e.getMessage()));
+            }
         }
     }
 
@@ -125,6 +86,7 @@ public class ImageActivity extends BaseActivity implements View.OnClickListener 
             mTextView.append(label.getConfidence() + "\n\n");
         }
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

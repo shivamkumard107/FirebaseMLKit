@@ -23,9 +23,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static com.developersk.firebasemlkitdemo.Utils.Imageutils.GALEERY_REQUEST_CODE;
 import static com.developersk.firebasemlkitdemo.Utils.Imageutils.SCANNER_REQUEST_CODE;
 
-public class ProfileActivity extends AppCompatActivity {
+public class FaceDetectionActivity extends AppCompatActivity {
 
-    String TAG = "ProfileActivity";
+    String TAG = "FaceDetectionActivity";
 
     Imageutils imageutils;
     Imageutils.ImageAttachmentListener imageAttachmentListener;
@@ -88,13 +88,13 @@ public class ProfileActivity extends AppCompatActivity {
                 public void onTransform(Bitmap updatedBitmap) {
                     Log.d("Time log", "Output is set");
                     ivProfile.setImageBitmap(updatedBitmap);
-                    Toast.makeText(ProfileActivity.this, "We detected a face", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FaceDetectionActivity.this, "We detected a face", Toast.LENGTH_SHORT).show();
                     progressUtils.dismissDialog();
                 }
 
                 @Override
                 public void onFailure() {
-                    Toast.makeText(ProfileActivity.this, "No face was detected", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FaceDetectionActivity.this, "No face was detected", Toast.LENGTH_SHORT).show();
                     progressUtils.dismissDialog();
 
                 }
