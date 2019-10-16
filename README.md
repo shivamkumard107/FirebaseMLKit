@@ -15,3 +15,9 @@ This is an open-source project where you can find the implemented source code fr
 https://github.com/shivamkumard107/FirebaseMLKit
 
 You simply pass in data to the ML Kit library and it will give you the information you need. The on-device APIs process data quickly and will work even when there’s no network connection.
+
+# How to run:
+- Create a Firebase project for your Google account.
+- Link your fork to your Firebase project, and copy the google-services.json file to your /app directory.
+- And you're done!
+- Link for additional info: https://developer.android.com/studio/write/firebase
