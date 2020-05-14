@@ -1,4 +1,4 @@
-## Firebase ML Kit - Your starter to the world of open source :)
+## Firebase ML Kit - Your starter to the world of machine learning :)
 Firebase ML Kit comes with the following machine learning APIs which are implemented and are ready to use in the application.
 1. Text Recognition
 2. Face Detection
